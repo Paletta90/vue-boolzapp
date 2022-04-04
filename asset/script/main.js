@@ -9,6 +9,8 @@ var app = new Vue(
             avatar: '_io'
         },
 
+        whoUser: 0,
+
         contacts: [
             {
                 name: 'Michele',
@@ -176,7 +178,10 @@ var app = new Vue(
        },
 
        methods: {
-
+        userClicked: function(index){
+            this.whoUser = index;
+            return this.whoUser;
+        }
        }
         
     }

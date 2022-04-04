@@ -23,15 +23,15 @@
     <div id="root">
 
         <!-- Sfondo della pagina -->
-        <div class="background p-5">
+        <div class="background-body p-5">
 
             <!-- Contenitore applicazione -->
             <div class="container h-100 prova">
 
-                <div class="row g-0">
+                <div class="row h-100 g-0">
 
                     <!-- Parte sinistra -->
-                    <div class="col-4">
+                    <div class="col-4 h-100 overflow-auto">
 
                         <!-- Dati profilo -->
                         <div class="bg-header d-flex justify-content-between align-items-center p-2">
@@ -75,7 +75,7 @@
                         </div>
 
                         <!-- Lista utenti  -->
-                        <div class="bg-white">
+                        <div class="bg-white h-100">
 
                             <!-- Barra ricerca utenti -->
                             <div class="input-group input-group-sm p-2">
@@ -91,7 +91,8 @@
 
                             <!-- Lista utenti chat -->
                             <ul class="list-group list-group-flush overflow-auto">
-                                <li class="list-group-item d-flex" v-for="(elem, index) in contacts">
+                                <li class="list-group-item d-flex" v-for="(elem, index) in contacts"
+                                    @click="userClicked(index)" role="button">
                                     <!-- Icona user -->
                                     <div class="me-3">
                                         <img class="img-user rounded-circle"
@@ -112,54 +113,60 @@
                     <!-- Parte destra -->
                     <div class="col-8 d-flex flex-column justify-content-between bg-chat">
 
-                        <!-- Header parte destra -->
-                        <div class="bg-header d-flex justify-content-between align-items-center p-2">
+                        <!-- Header e sezione messaggi inviati -->
+                        <div>
+                            <!-- Header -->
+                            <div class="bg-header d-flex justify-content-between align-items-center p-2">
 
-                            <!-- Foto user e dati -->
-                            <div class="d-flex align-items-center">
-                                <!-- Immagine User selezionato -->
-                                <img class="img-user rounded-circle me-3"
-                                    v-bind:src="'./asset/image/avatar' + user.avatar +  '.jpg'" alt="Immagine profilo">
-                                <!-- Dati user selezionato -->
-                                <div>
-                                    <div class="fw-bolder">Nome</div>
-                                    <div class="text-secondary">Accesso</div>
+                                <!-- Foto user e dati -->
+                                <div class="d-flex align-items-center">
+                                    <!-- Immagine User selezionato -->
+                                    <img class="img-user rounded-circle me-3"
+                                        v-bind:src="'./asset/image/avatar' + contacts[whoUser].avatar +  '.jpg'"
+                                        alt="Immagine profilo">
+                                    <!-- Dati user selezionato -->
+                                    <div>
+                                        <div class="fw-bolder">{{contacts[whoUser].name}}</div>
+                                        <div class="text-secondary">Accesso</div>
+                                    </div>
                                 </div>
+
+                                <!-- Icone -->
+                                <div class="d-flex text-secondary fs-5">
+                                    <i class="fa-solid fa-magnifying-glass me-3"></i>
+                                    <i class="fa-solid fa-paperclip me-3"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical me-3" role="button"></i>
+                                </div>
+
                             </div>
 
-                            <!-- Icone -->
-                            <div class="d-flex text-secondary fs-5">
-                                <i class="fa-solid fa-magnifying-glass me-3"></i>
-                                <i class="fa-solid fa-paperclip me-3"></i>
-                                <i class="fa-solid fa-ellipsis-vertical me-3" role="button"></i>
+                            <!-- Sezione messaggi inviati e ricevuti -->
+                            <div class="d-flex flex-column">
+                                <div class="rounded-3 w-25 p-2 m-3" 
+                                     v-for="(elem, index) in contacts[whoUser].messages"
+                                     :class="(elem.status == 'received') ? 'bg-received' : 'bg-white' "
+                                >{{elem.message}}
+                                </div>
+                                <!-- <div class="bg-white rounded-3 w-25 p-2 m-3">Dicci qualcosa</div>
+                                <div class="bg-received rounded-3 align-self-end w-25 p-2 m-3">Dicci qualcosa</div> -->
                             </div>
 
                         </div>
+                        <!-- Footer invio messaggi -->
+                        <div class="bg-footer">
 
-                        <!-- Sezione visualizzazione chat e input invia messaggi -->
-                        <div>
-
-                            <!-- Visualizzazione chat -->
-                            <div></div>
-
-                            <!-- footer invio messaggi -->
-                            <div class="bg-footer">
-
-                                <div class="input-group input-group-sm p-2">
-                                    <!-- Icona smile -->
-                                    <span class="text-secondary  border-0 input-group-text px-4" id="inputGroup-sizing-sm">
-                                        <i class="fs-5 fa-solid fa-face-smile"></i>
-                                    </span>
-                                    <!-- Input ricerca -->
-                                    <input type="text" class="form-control p-3"
-                                        placeholder="Scrivi messaggio" aria-label="Sizing example input"
-                                        aria-describedby="inputGroup-sizing-sm">
-                                    <!-- Icone microphone -->
-                                    <span class="text-secondary border-0 input-group-text px-4" id="inputGroup-sizing-sm">
-                                        <i class="fs-5 fa-solid fa-microphone"></i>
-                                    </span>
-                                </div>
-
+                            <div class="input-group input-group-sm p-2">
+                                <!-- Icona smile -->
+                                <span class="text-secondary  border-0 input-group-text px-4" id="inputGroup-sizing-sm">
+                                    <i class="fs-5 fa-solid fa-face-smile"></i>
+                                </span>
+                                <!-- Input ricerca -->
+                                <input type="text" class="form-control p-3" placeholder="Scrivi messaggio"
+                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <!-- Icone microphone -->
+                                <span class="text-secondary border-0 input-group-text px-4" id="inputGroup-sizing-sm">
+                                    <i class="fs-5 fa-solid fa-microphone"></i>
+                                </span>
                             </div>
 
                         </div>

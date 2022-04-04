@@ -2,8 +2,9 @@
     --color-header:#e9eaed;
     --color-notice: #99dafd;
     --color-footer: #f2eeed;
+    --color-textReceived: #d8f8bf;
 }
-.background{
+.background-body{
     height: 100vh;
     background-image: linear-gradient(to bottom,
     #359589 0px,
@@ -25,6 +26,10 @@
 }
 .bg-footer{
     background-color: var(--color-footer);
+}
+.bg-received{
+    background-color: var(--color-textReceived);
+    align-self: flex-end;
 }
 .prova{
     border: 1px solid red;
