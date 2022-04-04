@@ -1,6 +1,7 @@
 :root{
     --color-header:#e9eaed;
     --color-notice: #99dafd;
+    --color-footer: #f2eeed;
 }
 .background{
     height: 100vh;
@@ -15,6 +16,15 @@
 }
 .bg-notice{
     background-color: var(--color-notice);
+}
+.bg-chat{
+    background-image: url('../image/mine.jpg');
+    background-size: cover;
+    background-size: 40%;
+    background-repeat: repeat;
+}
+.bg-footer{
+    background-color: var(--color-footer);
 }
 .prova{
     border: 1px solid red;
