@@ -174,6 +174,21 @@ var app = new Vue(
                         date: '10/01/2020 15:51:00',
                         message: 'OK!!',
                         status: 'received'
+                    },
+                    {
+                        date: '10/01/2020 15:30:55',
+                        message: 'Ciao, andiamo a mangiare la pizza stasera?',
+                        status: 'received'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: 'No, l\'ho già mangiata ieri, ordiniamo sushi!',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:51:00',
+                        message: 'OK!!',
+                        status: 'received'
                     }
                 ],
             }

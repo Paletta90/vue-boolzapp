@@ -4,6 +4,7 @@
     --color-footer: #f2eeed;
     --color-textReceived: #d8f8bf;
 }
+/* Background */
 .background-body{
     height: 100vh;
     background-image: linear-gradient(to bottom,
@@ -31,9 +32,7 @@
     background-color: var(--color-textReceived);
     align-self: flex-end;
 }
-.prova{
-    border: 1px solid red;
-}
+/* utility */
 .img-user{
     width: 80px;
     height: 80px;
