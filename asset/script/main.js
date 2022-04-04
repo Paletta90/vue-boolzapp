@@ -9,7 +9,11 @@ var app = new Vue(
             avatar: '_io'
         },
 
+        // Dato che gestisce quale user è stato cliccato
         whoUser: 0,
+
+        // Stringa per ricerca utenti
+        stringSearchUser: '',
 
         contacts: [
             {
@@ -178,10 +182,23 @@ var app = new Vue(
        },
 
        methods: {
+
+        //Ritorno l'indice dello user selezionato
         userClicked: function(index){
             this.whoUser = index;
             return this.whoUser;
+        },
+
+        // Funzione per cercare utente
+        searchUser: function(string){
+            if(string.indexOf(this.stringSearchUser.toUpperCase()) > -1){
+                // stringSearchUser = '';
+                return true
+            }else{
+                return false
+            }
         }
+
        }
         
     }

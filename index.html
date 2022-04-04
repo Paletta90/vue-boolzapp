@@ -85,6 +85,7 @@
                                 </span>
                                 <!-- Input ricerca -->
                                 <input type="text" class="border-start-0 form-control "
+                                    v-model="stringSearchUser"
                                     placeholder="Cerca o inizia una nuova chat" aria-label="Sizing example input"
                                     aria-describedby="inputGroup-sizing-sm">
                             </div>
@@ -92,7 +93,7 @@
                             <!-- Lista utenti chat -->
                             <ul class="list-group list-group-flush overflow-auto">
                                 <li class="list-group-item d-flex" v-for="(elem, index) in contacts"
-                                    @click="userClicked(index)" role="button">
+                                    @click="userClicked(index)" role="button" v-if="searchUser(elem.name.toUpperCase())">
                                     <!-- Icona user -->
                                     <div class="me-3">
                                         <img class="img-user rounded-circle"
@@ -142,10 +143,12 @@
 
                             <!-- Sezione messaggi inviati e ricevuti -->
                             <div class="d-flex flex-column">
-                                <div class="rounded-3 w-25 p-2 m-3" 
+                                <div class="d-flex flex-column rounded-3 w-35 p-2 m-3" 
                                      v-for="(elem, index) in contacts[whoUser].messages"
                                      :class="(elem.status == 'received') ? 'bg-received' : 'bg-white' "
-                                >{{elem.message}}
+                                >
+                                <div>{{elem.message}}</div>
+                                <div class="text-secondary align-self-end" style="font-size: 10px;">{{ elem.date.split(' ')[1].substring(0,5) }}</div>
                                 </div>
                                 <!-- <div class="bg-white rounded-3 w-25 p-2 m-3">Dicci qualcosa</div>
                                 <div class="bg-received rounded-3 align-self-end w-25 p-2 m-3">Dicci qualcosa</div> -->
