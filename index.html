@@ -18,9 +18,104 @@
 </head>
 
 <body>
-    
+
     <!-- Vue.Js -->
     <div id="root">
+
+        <!-- Sfondo della pagina -->
+        <div class="background p-5">
+
+            <!-- Contenitore applicazione -->
+            <div class="container h-100 prova">
+
+                <div class="row">
+
+                    <!-- Parte sinistra -->
+                    <div class="col-4">
+
+                        <!-- Dati profilo -->
+                        <div class="bg-header d-flex justify-content-between align-items-center p-2">
+                            <!-- Foto profilo e nome sinistra -->
+                            <div class="d-flex align-items-center">
+
+                                <img class="img-user rounded-circle me-3"
+                                    v-bind:src="'./asset/image/avatar' + user.avatar +  '.jpg'" alt="Immagine profilo">
+                                <div class="fw-bolder">{{user.nome}}</div>
+
+                            </div>
+
+                            <!-- Icone destra -->
+                            <div class="text-secondary">
+                                <i class="fa-solid fa-circle-notch me-2" role="button"></i>
+                                <i class="fa-solid fa-message me-2" role="button"></i>
+                                <i class="fa-solid fa-ellipsis-vertical me-2" role="button"></i>
+                            </div>
+
+                        </div>
+
+                        <!-- Notifiche nuovi messaggi -->
+                        <div class="bg-notice d-flex align-items-center p-3">
+
+                            <!-- Logo Notifiche -->
+                            <div class="me-3">
+                                <div class="bg-white rounded-circle d-flex justify-content-center align-items-center" style="width: 80px; height: 80px;">
+                                    <i class="fa-regular fa-bell-slash"
+                                    style="font-size: 30px; color: var(--color-notice);"></i>
+                                </div>
+                                
+                            </div>
+
+                            <!-- Ricevere nuove notifiche -->
+                            <div>
+                                <div>Ricevi notifiche di nuove notifiche</div>
+                                <a class="text-secondary" href="#">Attiva notifiche desktop</a>
+                            </div>
+
+                        </div>
+
+                        <!-- Lista utenti  -->
+                        <div class="bg-white">
+
+                            <!-- Barra ricerca utenti -->
+                            <div class="input-group input-group-sm p-2">
+                                 <!-- Icona search -->
+                                 <span class="bg-white border-end-0 input-group-text px-4" id="inputGroup-sizing-sm">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                <!-- Input ricerca -->
+                                <input type="text" class="border-start-0 form-control " placeholder="Cerca o inizia una nuova chat"
+                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+
+                            <!-- Lista utenti chat -->
+                            <ul class="list-group list-group-flush overflow-auto">
+                                <li class="list-group-item d-flex"
+                                    v-for="(elem, index) in contacts"    
+                                >
+                                    <!-- Icona user -->
+                                    <div class="me-3">
+                                        <img class="img-user rounded-circle" :src="'./asset/image/avatar' + elem.avatar +'.jpg'" alt="Immagine user">
+                                    </div>
+                                    <!-- Dati user -->
+                                    <div>
+                                        <div class="fs-5">{{elem.name}}</div>
+                                        <a href="#" class="text-secondary">Ultimo messaggio inviato</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Parte destra -->
+                    <div class="col-8"></div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 

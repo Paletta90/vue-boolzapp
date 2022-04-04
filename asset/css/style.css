@@ -1,0 +1,25 @@
+:root{
+    --color-header:#e9eaed;
+    --color-notice: #99dafd;
+}
+.background{
+    height: 100vh;
+    background-image: linear-gradient(to bottom,
+    #359589 0px,
+    #359589 15vh,
+    #dcdbd4 15vh,
+    #d2dbde 100%);
+}
+.bg-header{
+    background-color: var(--color-header);
+}
+.bg-notice{
+    background-color: var(--color-notice);
+}
+.prova{
+    border: 1px solid red;
+}
+.img-user{
+    width: 80px;
+    height: 80px;
+}
