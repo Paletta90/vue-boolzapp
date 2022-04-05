@@ -36,6 +36,7 @@
 
                         <!-- Dati profilo -->
                         <div class="bg-header d-flex justify-content-between align-items-center p-2">
+
                             <!-- Foto profilo e nome sinistra -->
                             <div class="d-flex align-items-center">
 
@@ -61,7 +62,8 @@
                             <!-- Logo Notifiche -->
                             <div class="me-3">
 
-                                <div class="bg-white rounded-circle d-flex justify-content-center align-items-center cursor-pointer"
+                                <div class="bg-white rounded-circle d-flex justify-content-center align-items-center"
+                                    role="button"
                                     style="width: 70px; height: 70px;">
                                     <i class="fa-regular fa-bell-slash"
                                         style="font-size: 30px; color: var(--color-notice);"></i>
@@ -108,9 +110,13 @@
                                         </div>
                                         <!-- Dati user -->
                                         <div>
+
                                             <div class="fs-5">{{elem.name}}</div>
+
+                                            <!-- Controllo se l'ultimo messaggio è stato inviato o ricevuto -->
                                             <a v-if="elem.messages[elem.messages.length - 1].status == 'sent'" href="#" class="text-secondary">Ultimo messaggio inviato</a>
                                             <a v-else href="#" class="text-secondary">Ultimo messaggio ricevuto</a>
+                                            
                                         </div>
                                     </div>
 

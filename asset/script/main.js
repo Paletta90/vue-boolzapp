@@ -8,6 +8,7 @@ var app = new Vue({
             nome: 'Davide',
             avatar: '_io'
         },
+
         // Booleano per schermata iniziale
         initial: false,
         // Booleano per cambiare colore microfono
@@ -18,7 +19,6 @@ var app = new Vue({
         stringSearchUser: '',
         // Nuovo messaggio
         newText: '',
-        
 
         contacts: [{
                 name: 'Michele',
@@ -198,7 +198,6 @@ var app = new Vue({
         userClicked: function (index) {
             this.whoUser = index;
             this.initial = true;
-            // return this.whoUser;
         },
 
         // Funzione per ricerca utente
@@ -232,100 +231,96 @@ var app = new Vue({
             }
 
             this.contacts[this.whoUser].messages.push(objReceived)
+            
+            // Faccio stampare la risposta 'Ok' con un secondo di ritardo
             setTimeout(this.printAnswer, 1000)
 
             this.newText = '';
         },
 
-        // Funzione per creare una nuova data nel momento in cuo viene richiamata Data + Ora
-        newDate: function(){
-            //  Aggiungo uno zero davanti alle date da una cifra sola
-             let day = dayjs().date()
-             if(day <= 9){
-                 day = '0' + day;
-             }
-             let month = dayjs().month() + 1
-             if(month <= 9){
-                 month = "0" + month
-             }
+        // Data di oggi dd/mm/yyyy
+        dateToday: function () {
 
-             let hour = dayjs().hour()
-             if(hour <= 9){
-                 hour = "0" + hour
-             }
-             let minute = dayjs().minute()
-             if(minute <= 9){
-                 minute = "0" + minute
-             }
-             let second = dayjs().second()
-             if(second <= 9){
-                 second = "0" + second
-             }
-             var date = day + "/" + month + "/" + dayjs().year()
-             var time = hour  + ":" + minute + ":" + second
-
-             return String(date + " " + time)
-        },
-
-        // Data di oggi
-        dateToday: function(){
             //  Aggiungo uno zero davanti alle date da una cifra sola
             let day = dayjs().date()
-
-            if(day <= 9){
+            if (day <= 9) {
                 day = '0' + day;
             }
+
             let month = dayjs().month() + 1
-            if(month <= 9){
+            if (month <= 9) {
                 month = "0" + month
             }
 
-            return String( day + "/" + month + "/" + dayjs().year() );
+            return String(day + "/" + month + "/" + dayjs().year());
         },
 
-        // Funzione che ritorna l'orario dell'ultimo messaggio inviato/ricevuto
-        lastTime: function(elem){
-            let hour = elem.messages[elem.messages.length - 1].date.split(" ")[1].split(":");
+        // Data e ora corrente dd/mm/yyyy hh:mm:ss
+        newDate: function () {
+
+            // Aggiunzo zero davanti ai numero minori di 9
+            let hour = dayjs().hour()
+            if (hour <= 9) {
+                hour = "0" + hour
+            }
+            let minute = dayjs().minute()
+            if (minute <= 9) {
+                minute = "0" + minute
+            }
+            let second = dayjs().second()
+            if (second <= 9) {
+                second = "0" + second
+            }
+            var time = hour + ":" + minute + ":" + second
+
+            return String(this.dateToday() + " " + time)
+        },
+
+
+        // Funzione che ritorna l'orario dell'ultimo messaggio inviato/ricevuto hh:mm
+        lastTime: function (elem) {
+
+            // Ultimo indice dell'array
+            let lastIndex = elem.messages.length - 1;
+
+            let hour = elem.messages[lastIndex].date.split(" ")[1].split(":");
+
+            // Ritorno una stringa nel formato hh:mm
             return String(hour[0] + ":" + hour[1])
-        },
-        // Funzione che ritorna la data e l'orario dell'ultimo messaggio inviato/ricevuto
-        lastDateTime: function(elem){
-            let data = elem.messages[elem.messages.length - 1].date.split(" ")[0]
-            let hour = elem.messages[elem.messages.length - 1].date.split(" ")[1].split(":");
-            return String(data + " " + "alle " + hour[0] + ":" + hour[1])
+
         },
 
-         // Funzione per cancellare messaggio
-         deleteMessage: function(elem){
+        // Funzione che ritorna la data e l'orario dell'ultimo messaggio inviato/ricevuto dd/mm/yyyy hh/mm
+        lastDateTime: function (elem) {
+
+            // Ultimo indice dell'array
+            let lastIndex = elem.messages.length - 1;
+
+            let data = elem.messages[lastIndex].date.split(" ")[0]
+
+            return String(data + " " + "alle " + this.lastTime(elem))
+
+        },
+
+        // Funzione per cancellare messaggio
+        deleteMessage: function (elem) {
             elem.status = ''
         },
 
-        compareTwoDate: function(date){
-            let lastDate = this.contacts[this.whoUser].messages[this.contacts[this.whoUser].messages.length - 1].date.split(" ")[0];
+        // Confronta una data con l'ultima data di invio/ricevuta. Se uguali ritorna true
+        compareTwoDate: function (date) {
 
-            if(lastDate == date){
+            // Ultimo indice dell'array
+            let lastIndex = this.contacts[this.whoUser].messages.length - 1;
+
+            // Seleziono solo la data dd/mm/yyyy
+            let lastDate = this.contacts[this.whoUser].messages[lastIndex].date.split(" ")[0];
+
+            if (lastDate == date) {
                 return true
             }
             return false
         }
-        //Funzione per vedere quando è stato inviato 'ultimo messaggio
-        // lastMessage: function(elem){
-        //     let year = elem.messages[0].date.split("/")[2].split(" ")[0]
-        //     let month = elem.messages[0].date.split("/")[1]
-        //     let day = elem.messages[0].date.split("/")[0]
-        //     let hour = elem.messages[0].date.split(" ")[1].split(":")[0]
-        //     let minute = elem.messages[0].date.split(" ")[1].split(":")[1]
-        //     let second = elem.messages[0].date.split(" ")[1].split(":")[2]
-           
-        //     for(let i = 1; i < elem.messages.length - 1; i++){
-
-        //         if( year <= elem.messages[i].date.split("/")[2].split(" ")[0] ){
-        //             year = 
-        //         }
-
-        //     }
-        //     return String()
-        // }
 
     }
 
