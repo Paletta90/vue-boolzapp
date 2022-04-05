@@ -109,12 +109,13 @@
                                         <!-- Dati user -->
                                         <div>
                                             <div class="fs-5">{{elem.name}}</div>
-                                            <a href="#" class="text-secondary">Ultimo messaggio inviato</a>
+                                            <a v-if="elem.messages[elem.messages.length - 1].status == 'sent'" href="#" class="text-secondary">Ultimo messaggio inviato</a>
+                                            <a v-else href="#" class="text-secondary">Ultimo messaggio ricevuto</a>
                                         </div>
                                     </div>
 
                                     <div class="text-secondary">
-                                        12:00
+                                        {{lastTime(elem)}}
                                     </div>
 
                                 </li>
@@ -141,7 +142,7 @@
                                     <!-- Dati user selezionato -->
                                     <div>
                                         <div class="fw-bolder">{{contacts[whoUser].name}}</div>
-                                        <div class="text-secondary">Accesso</div>
+                                        <div class="text-secondary">Ultimo accesso {{lastDateTime(contacts[whoUser])}}</div>
                                     </div>
                                 </div>
 
@@ -162,13 +163,13 @@
                                     :class="(elem.status == 'received') ? 'bg-received align-self-end' : 'bg-white'"
                                     role="button">
 
-                                    <!-- Dropdown menu al click sul messaggio -->
                                     <div class="d-flex justify-content-between" data-bs-toggle="dropdown">
                                         <div>{{elem.message}}</div>
                                         <div class="text-secondary align-self-end" style="font-size: 10px;">
                                             {{ elem.date.split(' ')[1].substring(0,5) }}</div>
 
                                     </div>
+                                    <!-- Dropdown menu al click sul messaggio -->
                                     <div class="dropdown-menu">
                                         <a href="#" class="dropdown-item">Message info</a>
                                         <hr class="dropdown-divider">

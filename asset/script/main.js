@@ -9,7 +9,6 @@ var app = new Vue({
             avatar: '_io'
         },
 
-        delete: true,
         // Booleano per cambiare colore microfono
         mouseHovered: false,
         // Dato che gestisce quale user è stato cliccato
@@ -18,6 +17,7 @@ var app = new Vue({
         stringSearchUser: '',
         // Nuovo messaggio
         newText: '',
+        
 
         contacts: [{
                 name: 'Michele',
@@ -268,8 +268,35 @@ var app = new Vue({
         // Funzione per cancellare messaggio
         deleteMessage: function(elem){
             elem.status = ''
-        }
+        },
 
+        //Funzione per vedere quando è stato inviato 'ultimo messaggio
+        // lastMessage: function(elem){
+        //     let year = elem.messages[0].date.split("/")[2].split(" ")[0]
+        //     let month = elem.messages[0].date.split("/")[1]
+        //     let day = elem.messages[0].date.split("/")[0]
+        //     let hour = elem.messages[0].date.split(" ")[1].split(":")[0]
+        //     let minute = elem.messages[0].date.split(" ")[1].split(":")[1]
+        //     let second = elem.messages[0].date.split(" ")[1].split(":")[2]
+           
+        //     for(let i = 1; i < elem.messages.length - 1; i++){
+
+        //         if( year <= elem.messages[i].date.split("/")[2].split(" ")[0] ){
+        //             year = 
+        //         }
+
+        //     }
+        //     return String()
+        // }
+        lastTime: function(elem){
+            let hour = elem.messages[elem.messages.length - 1].date.split(" ")[1].split(":");
+            return String(hour[0] + ":" + hour[1])
+        },
+        lastDateTime: function(elem){
+            let data = elem.messages[elem.messages.length - 1].date.split(" ")[0]
+            let hour = elem.messages[elem.messages.length - 1].date.split(" ")[1].split(":");
+            return String(data + " " + "alle " + hour[0] + ":" + hour[1])
+        }
     }
 
 })
