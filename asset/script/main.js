@@ -215,7 +215,7 @@ var app = new Vue({
             let objSent = {
                 date: this.newDate(),
                 message: 'Ok',
-                status: 'Sent'
+                status: 'sent'
             }
             this.contacts[this.whoUser].messages.push(objSent)
 

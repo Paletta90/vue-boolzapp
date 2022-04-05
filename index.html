@@ -163,16 +163,18 @@
                                     role="button">
 
                                     <!-- Dropdown menu al click sul messaggio -->
-                                        <div class="d-flex flex-column" data-bs-toggle="dropdown">
-                                            <div>{{elem.message}}</div>
-                                            <div class="text-secondary align-self-end" style="font-size: 10px;">
-                                                {{ elem.date.split(' ')[1].substring(0,5) }}</div>
-                                        </div>
-                                        <div class="dropdown-menu">
-                                            <a href="#" class="dropdown-item">Message info</a>
-                                            <hr class="dropdown-divider">
-                                            <a href="#" class="dropdown-item" @click="deleteMessage(elem)">Delete message</a>
-                                        </div>
+                                    <div class="d-flex justify-content-between" data-bs-toggle="dropdown">
+                                        <div>{{elem.message}}</div>
+                                        <div class="text-secondary align-self-end" style="font-size: 10px;">
+                                            {{ elem.date.split(' ')[1].substring(0,5) }}</div>
+
+                                    </div>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item">Message info</a>
+                                        <hr class="dropdown-divider">
+                                        <a href="#" class="dropdown-item" @click="deleteMessage(elem)">Delete
+                                            message</a>
+                                    </div>
 
                                 </div>
                             </div>
