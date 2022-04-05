@@ -9,6 +9,7 @@ var app = new Vue({
             avatar: '_io'
         },
 
+        delete: true,
         // Booleano per cambiare colore microfono
         mouseHovered: false,
         // Dato che gestisce quale user è stato cliccato
@@ -262,6 +263,11 @@ var app = new Vue({
              var time = hour  + ":" + minute + ":" + second
 
              return String(date + " " + time)
+        },
+
+        // Funzione per cancellare messaggio
+        deleteMessage: function(elem){
+            elem.status = ''
         }
 
     }
