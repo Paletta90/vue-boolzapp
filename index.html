@@ -14,7 +14,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Link file.css -->
     <link rel="stylesheet" href="./asset/css/style.css">
-    <title>Document</title>
+
+    <title>Boolzap</title>
 </head>
 
 <body>
@@ -31,15 +32,16 @@
                 <div class="row h-100 g-0">
 
                     <!-- Parte sinistra -->
-                    <div class="col-4 h-100 overflow-auto">
+                    <div class="col-4 overflow-auto h-100">
 
                         <!-- Dati profilo -->
                         <div class="bg-header d-flex justify-content-between align-items-center p-2">
                             <!-- Foto profilo e nome sinistra -->
                             <div class="d-flex align-items-center">
 
-                                <img class="img-user rounded-circle me-3"
-                                    v-bind:src="'./asset/image/avatar' + user.avatar +  '.jpg'" alt="Immagine profilo">
+                                <a href="#"> <img class="img-user rounded-circle me-3"
+                                        v-bind:src="'./asset/image/avatar' + user.avatar +  '.jpg'"
+                                        :alt="'Immagine profilo di ' + user.nome"></a>
                                 <div class="fw-bolder">{{user.nome}}</div>
 
                             </div>
@@ -58,8 +60,9 @@
 
                             <!-- Logo Notifiche -->
                             <div class="me-3">
-                                <div class="bg-white rounded-circle d-flex justify-content-center align-items-center"
-                                    style="width: 80px; height: 80px;">
+
+                                <div class="bg-white rounded-circle d-flex justify-content-center align-items-center cursor-pointer"
+                                    style="width: 70px; height: 70px;">
                                     <i class="fa-regular fa-bell-slash"
                                         style="font-size: 30px; color: var(--color-notice);"></i>
                                 </div>
@@ -80,26 +83,27 @@
                             <!-- Barra ricerca utenti -->
                             <div class="input-group input-group-sm p-2">
                                 <!-- Icona search -->
-                                <span class="bg-white border-end-0 input-group-text px-4" id="inputGroup-sizing-sm">
+                                <span class="bg-white border-end-0 input-group-text cursor-pointer px-4" id="inputGroup-sizing-sm">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </span>
                                 <!-- Input ricerca -->
-                                <input type="text" class="border-start-0 form-control " v-model="stringSearchUser"
+                                <input type="text" class="border-start-0 form-control " 
+                                    v-model="stringSearchUser"
                                     placeholder="Cerca o inizia una nuova chat" aria-label="Sizing example input"
                                     aria-describedby="inputGroup-sizing-sm">
                             </div>
 
                             <!-- Lista utenti chat -->
                             <ul class="list-group list-group-flush overflow-auto">
-                                <li class="list-group-item d-flex justify-content-between" v-for="(elem, index) in contacts"
-                                    @click="userClicked(index)" role="button"
+                                <li class="list-group-item d-flex justify-content-between"
+                                    v-for="(elem, index) in contacts" @click="userClicked(index)" role="button"
                                     v-if="searchUser(elem.name.toUpperCase())">
 
                                     <div class="d-flex">
                                         <!-- Icona user -->
                                         <div class="me-3">
                                             <img class="img-user rounded-circle"
-                                                :src="'./asset/image/avatar' + elem.avatar +'.jpg'" alt="Immagine user">
+                                                :src="'./asset/image/avatar' + elem.avatar +'.jpg'" :alt="'Immagine di ' + elem.name">
                                         </div>
                                         <!-- Dati user -->
                                         <div>
@@ -130,7 +134,7 @@
                                 <!-- Foto user e dati -->
                                 <div class="d-flex align-items-center">
                                     <!-- Immagine User selezionato -->
-                                    <img class="img-user rounded-circle me-3"
+                                    <img class="img-user rounded-circle cursor-pointer me-3"
                                         v-bind:src="'./asset/image/avatar' + contacts[whoUser].avatar +  '.jpg'"
                                         alt="Immagine profilo">
                                     <!-- Dati user selezionato -->
@@ -142,8 +146,8 @@
 
                                 <!-- Icone -->
                                 <div class="d-flex text-secondary fs-5">
-                                    <i class="fa-solid fa-magnifying-glass me-3"></i>
-                                    <i class="fa-solid fa-paperclip me-3"></i>
+                                    <i class="fa-solid fa-magnifying-glass me-3" role="button"></i>
+                                    <i class="fa-solid fa-paperclip me-3" role="button"></i>
                                     <i class="fa-solid fa-ellipsis-vertical me-3" role="button"></i>
                                 </div>
 
@@ -153,31 +157,40 @@
                             <div class="d-flex flex-column">
                                 <div class="d-flex flex-column rounded-3 w-35 p-2 m-3"
                                     v-for="(elem, index) in contacts[whoUser].messages"
-                                    :class="(elem.status == 'received') ? 'bg-received' : 'bg-white' ">
+                                    :class="(elem.status == 'received') ? 'bg-received align-self-end' : 'bg-white' "
+                                >
                                     <div>{{elem.message}}</div>
                                     <div class="text-secondary align-self-end" style="font-size: 10px;">
                                         {{ elem.date.split(' ')[1].substring(0,5) }}</div>
                                 </div>
-                                <!-- <div class="bg-white rounded-3 w-25 p-2 m-3">Dicci qualcosa</div>
-                                <div class="bg-received rounded-3 align-self-end w-25 p-2 m-3">Dicci qualcosa</div> -->
                             </div>
 
                         </div>
+
                         <!-- Footer invio messaggi -->
                         <div class="bg-footer">
 
                             <div class="input-group input-group-sm p-2">
+
                                 <!-- Icona smile -->
-                                <span class="text-secondary  border-0 input-group-text px-4" id="inputGroup-sizing-sm">
+                                <span class="text-secondary  border-0 input-group-text px-4" id="inputGroup-sizing-sm"
+                                    role="button">
                                     <i class="fs-5 fa-solid fa-face-smile"></i>
                                 </span>
+
                                 <!-- Input ricerca -->
                                 <input type="text" class="form-control p-3" placeholder="Scrivi messaggio"
-                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                                    v-model="newText"  v-on:keyup.enter="printNewText(newText)"  
+                                >
+
                                 <!-- Icone microphone -->
-                                <span class="text-secondary border-0 input-group-text px-4" id="inputGroup-sizing-sm">
+                                <span class="text-secondary border-0 input-group-text px-4" id="inputGroup-sizing-sm"
+                                    role="button" @mouseover="mouseHovered = true" @mouseleave="mouseHovered = false"
+                                    :class="(mouseHovered == true) ? 'text-danger' : ''">
                                     <i class="fs-5 fa-solid fa-microphone"></i>
                                 </span>
+
                             </div>
 
                         </div>
@@ -199,6 +212,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+    <!-- Script Day.js -->
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <!-- Script js -->
     <script src="./asset/script/main.js"></script>
 </body>

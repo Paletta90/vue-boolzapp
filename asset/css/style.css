@@ -30,13 +30,20 @@
 }
 .bg-received{
     background-color: var(--color-textReceived);
-    align-self: flex-end;
+    /* align-self: flex-end; */
 }
 /* utility */
+.cursor-pointer{
+    cursor: pointer;
+}
 .img-user{
     width: 80px;
     height: 80px;
 }
 .w-35{
     width: 35%;
+}
+/* Hover */
+.list-group-item:hover{
+    background-color: #e8ebee;
 }

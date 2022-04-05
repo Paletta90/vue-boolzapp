@@ -1,27 +1,28 @@
-var app = new Vue(
-    {
-       el: '#root',
+var app = new Vue({
+    el: '#root',
 
-       data: {
-        
+    data: {
+
+        // Oggetto profilo
         user: {
             nome: 'Davide',
             avatar: '_io'
         },
 
+        // Booleano per cambiare colore microfono
+        mouseHovered: false,
         // Dato che gestisce quale user è stato cliccato
         whoUser: 0,
-
         // Stringa per ricerca utenti
         stringSearchUser: '',
+        // Nuovo messaggio
+        newText: '',
 
-        contacts: [
-            {
+        contacts: [{
                 name: 'Michele',
                 avatar: '_1',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '10/01/2020 15:30:55',
                         message: 'Hai portato a spasso il cane?',
                         status: 'sent'
@@ -42,8 +43,7 @@ var app = new Vue(
                 name: 'Fabio',
                 avatar: '_2',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '20/03/2020 16:30:00',
                         message: 'Ciao come stai?',
                         status: 'sent'
@@ -64,8 +64,7 @@ var app = new Vue(
                 name: 'Samuele',
                 avatar: '_3',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '28/03/2020 10:10:40',
                         message: 'La Marianna va in campagna',
                         status: 'received'
@@ -86,8 +85,7 @@ var app = new Vue(
                 name: 'Alessandro B.',
                 avatar: '_4',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '10/01/2020 15:30:55',
                         message: 'Lo sai che ha aperto una nuova pizzeria?',
                         status: 'sent'
@@ -103,8 +101,7 @@ var app = new Vue(
                 name: 'Alessandro L.',
                 avatar: '_5',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '10/01/2020 15:30:55',
                         message: 'Ricordati di chiamare la nonna',
                         status: 'sent'
@@ -120,8 +117,7 @@ var app = new Vue(
                 name: 'Claudia',
                 avatar: '_6',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '10/01/2020 15:30:55',
                         message: 'Ciao Claudia, hai novità?',
                         status: 'sent'
@@ -142,8 +138,7 @@ var app = new Vue(
                 name: 'Federico',
                 avatar: '_7',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '10/01/2020 15:30:55',
                         message: 'Fai gli auguri a Martina che è il suo compleanno!',
                         status: 'sent'
@@ -159,8 +154,7 @@ var app = new Vue(
                 name: 'Davide',
                 avatar: '_8',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '10/01/2020 15:30:55',
                         message: 'Ciao, andiamo a mangiare la pizza stasera?',
                         status: 'received'
@@ -194,27 +188,82 @@ var app = new Vue(
             }
         ]
 
-       },
+    },
 
-       methods: {
+    methods: {
 
         //Ritorno l'indice dello user selezionato
-        userClicked: function(index){
+        userClicked: function (index) {
             this.whoUser = index;
-            return this.whoUser;
+            // return this.whoUser;
         },
 
-        // Funzione per cercare utente
-        searchUser: function(string){
-            if(string.indexOf(this.stringSearchUser.toUpperCase()) > -1){
+        // Funzione per ricerca utente
+        searchUser: function (string) {
+            // Per ogni lettera che viene individuata ritorna ++
+            if (string.indexOf(this.stringSearchUser.toUpperCase()) > -1) {
                 // stringSearchUser = '';
                 return true
-            }else{
+            } else {
                 return false
             }
+        },
+
+        // Funzione risposta message 'Ok'
+        printAnswer: function () {
+            let objSent = {
+                date: this.newDate(),
+                message: 'Ok',
+                status: 'Sent'
+            }
+            this.contacts[this.whoUser].messages.push(objSent)
+
+        },
+        // Funzione per stampare nuovo messaggio inserito
+        printNewText: function (text) {
+
+            let objReceived = {
+                date: this.newDate(),
+                message: text,
+                status: 'received'
+            }
+
+            this.contacts[this.whoUser].messages.push(objReceived)
+            setTimeout(this.printAnswer, 1000)
+
+            this.newText = '';
+        },
+
+        // Funzione per creare una nuova data
+        newDate: function(){
+            //  Aggiungo uno zero davanti alle date da una cifra sola
+             let day = dayjs().date()
+             if(day <= 9){
+                 day = '0' + day;
+             }
+             let month = dayjs().month() + 1
+             if(month <= 9){
+                 month = "0" + month
+             }
+
+             let hour = dayjs().hour()
+             if(hour <= 9){
+                 hour = "0" + hour
+             }
+             let minute = dayjs().minute()
+             if(minute <= 9){
+                 minute = "0" + minute
+             }
+             let second = dayjs().second()
+             if(second <= 9){
+                 second = "0" + second
+             }
+             var date = day + "/" + month + "/" + dayjs().year()
+             var time = hour  + ":" + minute + ":" + second
+
+             return String(date + " " + time)
         }
 
-       }
-        
     }
-)
+
+})
