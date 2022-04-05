@@ -8,7 +8,8 @@ var app = new Vue({
             nome: 'Davide',
             avatar: '_io'
         },
-        // data: this.dateToday(),
+        // Booleano per schermata iniziale
+        initial: false,
         // Booleano per cambiare colore microfono
         mouseHovered: false,
         // Dato che gestisce quale user è stato cliccato
@@ -196,6 +197,7 @@ var app = new Vue({
         //Ritorno l'indice dello user selezionato
         userClicked: function (index) {
             this.whoUser = index;
+            this.initial = true;
             // return this.whoUser;
         },
 
