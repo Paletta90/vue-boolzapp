@@ -142,7 +142,10 @@
                                     <!-- Dati user selezionato -->
                                     <div>
                                         <div class="fw-bolder">{{contacts[whoUser].name}}</div>
-                                        <div class="text-secondary">Ultimo accesso {{lastDateTime(contacts[whoUser])}}</div>
+                                        <div v-if="compareTwoDate(dateToday())" class="text-secondary">Ultimo accesso oggi alle {{lastTime(contacts[whoUser])}}</div>
+                                        <div v-else class="text-secondary">
+                                            Ultimo accesso {{lastDateTime(contacts[whoUser])}}
+                                        </div>
                                     </div>
                                 </div>
 

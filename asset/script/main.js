@@ -8,7 +8,7 @@ var app = new Vue({
             nome: 'Davide',
             avatar: '_io'
         },
-
+        // data: this.dateToday(),
         // Booleano per cambiare colore microfono
         mouseHovered: false,
         // Dato che gestisce quale user è stato cliccato
@@ -235,7 +235,7 @@ var app = new Vue({
             this.newText = '';
         },
 
-        // Funzione per creare una nuova data
+        // Funzione per creare una nuova data nel momento in cuo viene richiamata Data + Ora
         newDate: function(){
             //  Aggiungo uno zero davanti alle date da una cifra sola
              let day = dayjs().date()
@@ -265,11 +265,47 @@ var app = new Vue({
              return String(date + " " + time)
         },
 
-        // Funzione per cancellare messaggio
-        deleteMessage: function(elem){
+        // Data di oggi
+        dateToday: function(){
+            //  Aggiungo uno zero davanti alle date da una cifra sola
+            let day = dayjs().date()
+
+            if(day <= 9){
+                day = '0' + day;
+            }
+            let month = dayjs().month() + 1
+            if(month <= 9){
+                month = "0" + month
+            }
+
+            return String( day + "/" + month + "/" + dayjs().year() );
+        },
+
+        // Funzione che ritorna l'orario dell'ultimo messaggio inviato/ricevuto
+        lastTime: function(elem){
+            let hour = elem.messages[elem.messages.length - 1].date.split(" ")[1].split(":");
+            return String(hour[0] + ":" + hour[1])
+        },
+        // Funzione che ritorna la data e l'orario dell'ultimo messaggio inviato/ricevuto
+        lastDateTime: function(elem){
+            let data = elem.messages[elem.messages.length - 1].date.split(" ")[0]
+            let hour = elem.messages[elem.messages.length - 1].date.split(" ")[1].split(":");
+            return String(data + " " + "alle " + hour[0] + ":" + hour[1])
+        },
+
+         // Funzione per cancellare messaggio
+         deleteMessage: function(elem){
             elem.status = ''
         },
 
+        compareTwoDate: function(date){
+            let lastDate = this.contacts[this.whoUser].messages[this.contacts[this.whoUser].messages.length - 1].date.split(" ")[0];
+
+            if(lastDate == date){
+                return true
+            }
+            return false
+        }
         //Funzione per vedere quando è stato inviato 'ultimo messaggio
         // lastMessage: function(elem){
         //     let year = elem.messages[0].date.split("/")[2].split(" ")[0]
@@ -288,15 +324,7 @@ var app = new Vue({
         //     }
         //     return String()
         // }
-        lastTime: function(elem){
-            let hour = elem.messages[elem.messages.length - 1].date.split(" ")[1].split(":");
-            return String(hour[0] + ":" + hour[1])
-        },
-        lastDateTime: function(elem){
-            let data = elem.messages[elem.messages.length - 1].date.split(" ")[0]
-            let hour = elem.messages[elem.messages.length - 1].date.split(" ")[1].split(":");
-            return String(data + " " + "alle " + hour[0] + ":" + hour[1])
-        }
+
     }
 
 })
