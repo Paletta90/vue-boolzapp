@@ -47,3 +47,9 @@
 .list-group-item:hover{
     background-color: #e8ebee;
 }
+.fa-microphone:hover{
+    color: red;
+}
+.fa-paper-plane:hover{
+    color: green;
+}

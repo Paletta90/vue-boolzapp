@@ -187,7 +187,7 @@
                                     <div>{{elem.message}}</div>
 
                                     <div class="d-flex flex-column justify-content-between dropdwon">
-                                        
+
                                         <!-- Icona da cui parte il dropdwon menu -->
                                         <span data-bs-toggle="dropdown"><i class="fa-solid fa-chevron-up"></i></span>
                                         <!-- Prendo solo l'ora nel formato hh:mm -->
@@ -227,9 +227,12 @@
 
                                 <!-- Icone microphone -->
                                 <span class="text-secondary border-0 input-group-text px-4" id="inputGroup-sizing-sm"
-                                    role="button" @mouseover="mouseHovered = true" @mouseleave="mouseHovered = false"
-                                    :class="(mouseHovered == true) ? 'text-danger' : ''">
-                                    <i class="fs-5 fa-solid fa-microphone"></i>
+                                    role="button">
+
+                                    <!-- Se digito una stringa cambio in logo in aeroplano -->
+                                    <i v-if="checkText(newText)" @click="printNewText(newText)" class="fa-solid fa-paper-plane"></i>
+                                    <i v-else class="fs-5 fa-solid fa-microphone"></i>
+
                                 </span>
 
                             </div>

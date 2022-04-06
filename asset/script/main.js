@@ -211,7 +211,7 @@ var app = new Vue({
         printNewText: function (text) {
 
             // Non stampo se la stringa è vuota o ci sono solo spazi bianchi
-            if (text != '' && text.replace(/\s/g, '').length != 0) {
+            if (this.checkText(text)) {
 
                 let objReceived = {
                     date: this.newDate(),
@@ -229,6 +229,13 @@ var app = new Vue({
 
         },
 
+        // Funzione per controlloare se la stringa non è vuota o ha solo spazi bianchi
+        checkText: function(text){
+            if(text != '' && text.replace(/\s/g, '').length != 0){
+                return true
+            }
+            return false
+        },
         // Data di oggi dd/mm/yyyy
         dateToday: function () {
 
