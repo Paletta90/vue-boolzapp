@@ -53,3 +53,10 @@
 .fa-paper-plane:hover{
     color: green;
 }
+
+/* Media Query */
+@media screen and (max-width: 768px){
+    .w-35{
+        width: 90%;
+    }
+}

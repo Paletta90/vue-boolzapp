@@ -38,7 +38,7 @@
                         <div class="bg-header d-flex justify-content-between align-items-center p-2">
 
                             <!-- Foto profilo e nome sinistra -->
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex flex-column align-items-center flex-sm-row align-items-sm-center">
 
                                 <a href="#"> <img class="img-user rounded-circle me-3"
                                         v-bind:src="'./asset/image/avatar' + user.avatar +  '.jpg'"
@@ -57,7 +57,7 @@
                         </div>
 
                         <!-- Notifiche nuovi messaggi -->
-                        <div class="bg-notice d-flex align-items-center p-3">
+                        <div class="bg-notice d-flex flex-column align-items-center flex-md-row align-items-center p-3">
 
                             <!-- Logo Notifiche -->
                             <div class="me-3">
@@ -96,11 +96,11 @@
 
                             <!-- Lista utenti chat -->
                             <ul class="list-group list-group-flush overflow-auto">
-                                <li class="list-group-item d-flex justify-content-between"
+                                <li class="list-group-item d-flex flex-column flex-md-row justify-content-md-between"
                                     v-for="(elem, index) in contacts" @click="userClicked(index)" role="button"
                                     v-if="searchUser(elem.name.toUpperCase())">
 
-                                    <div class="d-flex">
+                                    <div class="d-flex flex-column flex-md-row">
                                         <!-- Icona user -->
                                         <div class="me-3">
                                             <img class="img-user rounded-circle"
@@ -144,10 +144,10 @@
                         <div v-else>
 
                             <!-- Header -->
-                            <div class="bg-header d-flex justify-content-between align-items-center p-2">
+                            <div class="bg-header d-flex flex-column align-items-center  flex-sm-row justify-content-sm-between align-items-sm-center p-2">
 
                                 <!-- Foto user e dati -->
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex flex-column align-items-center flex-sm-row align-items-sm-center">
                                     <!-- Immagine User selezionato -->
                                     <img class="img-user rounded-circle cursor-pointer me-3"
                                         v-bind:src="'./asset/image/avatar' + contacts[whoUser].avatar +  '.jpg'"
@@ -175,7 +175,7 @@
                                 </div>
 
                                 <!-- Icone -->
-                                <div class="d-flex text-secondary fs-5">
+                                <div class="d-flex align-self-end align-self-sm-center text-secondary fs-5">
                                     <i class="fa-solid fa-magnifying-glass me-3" role="button"></i>
                                     <i class="fa-solid fa-paperclip me-3" role="button"></i>
                                     <i class="fa-solid fa-ellipsis-vertical me-3" role="button"></i>
@@ -222,7 +222,7 @@
                             <div class="input-group input-group-sm p-2">
 
                                 <!-- Icona smile -->
-                                <span class="text-secondary  border-0 input-group-text px-4" id="inputGroup-sizing-sm"
+                                <span class="d-none d-sm-flex border-0 input-group-text px-4" id="inputGroup-sizing-sm"
                                     role="button">
                                     <i class="fs-5 fa-solid fa-face-smile"></i>
                                 </span>
