@@ -48,7 +48,7 @@
                             </div>
 
                             <!-- Icone destra -->
-                            <div class="text-secondary fs-5">
+                            <div class="text-secondary fs-5 d-none d-lg-block">
                                 <i class="fa-solid fa-circle-notch me-3" role="button"></i>
                                 <i class="fa-solid fa-message me-3" role="button"></i>
                                 <i class="fa-solid fa-ellipsis-vertical me-3" role="button"></i>
@@ -63,8 +63,7 @@
                             <div class="me-3">
 
                                 <div class="bg-white rounded-circle d-flex justify-content-center align-items-center"
-                                    role="button"
-                                    style="width: 70px; height: 70px;">
+                                    role="button" style="width: 70px; height: 70px;">
                                     <i class="fa-regular fa-bell-slash"
                                         style="font-size: 30px; color: var(--color-notice);"></i>
                                 </div>
@@ -114,9 +113,11 @@
                                             <div class="fs-5">{{elem.name}}</div>
 
                                             <!-- Controllo se l'ultimo messaggio è stato inviato o ricevuto -->
-                                            <a v-if="elem.messages[elem.messages.length - 1].status == 'sent'" href="#" class="text-secondary">Ultimo messaggio inviato</a>
+                                            <a v-if="elem.messages[elem.messages.length - 1].status == 'sent'" href="#"
+                                                class="text-secondary">Ultimo messaggio inviato</a>
                                             <a v-else href="#" class="text-secondary">Ultimo messaggio ricevuto</a>
-                                            
+                                            <p>{{elem.messages[elem.messages.length - 1].message}}</p>
+
                                         </div>
                                     </div>
 
@@ -132,7 +133,7 @@
                     </div>
 
                     <!-- Parte destra -->
-                    <div  class="col-8 d-flex flex-column justify-content-between bg-chat overflow-auto h-100">
+                    <div class="col-8 d-flex flex-column justify-content-between bg-chat overflow-auto h-100">
 
                         <!-- Testo che compare quando viene caricata la pagina -->
                         <div v-if="initial == false" class="text-center">
@@ -141,7 +142,7 @@
 
                         <!-- Header e sezione messaggi inviati -->
                         <div v-else>
-                            
+
                             <!-- Header -->
                             <div class="bg-header d-flex justify-content-between align-items-center p-2">
 
@@ -153,11 +154,16 @@
                                         alt="Immagine profilo">
                                     <!-- Dati user selezionato -->
                                     <div>
+
                                         <div class="fw-bolder">{{contacts[whoUser].name}}</div>
-                                        <div v-if="compareTwoDate(dateToday())" class="text-secondary">Ultimo accesso oggi alle {{lastTime(contacts[whoUser])}}</div>
+
+                                        <!-- Controllo se la data di messaggio inserito/ricevuto è di oggi -->
+                                        <div v-if="compareTwoDate(dateToday())" class="text-secondary">Ultimo accesso
+                                            oggi alle {{lastTime(contacts[whoUser])}}</div>
                                         <div v-else class="text-secondary">
                                             Ultimo accesso {{lastDateTime(contacts[whoUser])}}
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -172,24 +178,30 @@
 
                             <!-- Sezione messaggi inviati e ricevuti -->
                             <div class="d-flex flex-column">
-                                <div class="dropstart d-flex flex-column rounded-3 w-35 p-2 m-3"
-                                    v-for="(elem, index) in contacts[whoUser].messages"
-                                    v-if="elem.status == 'sent' || elem.status == 'received'"
+                                <div class="d-flex justify-content-between rounded-3 w-35 p-2 m-3"
+                                    v-for="(elem, index) in contacts[whoUser].messages" v-if="elem.status != 'delete'"
                                     :class="(elem.status == 'received') ? 'bg-received align-self-end' : 'bg-white'"
                                     role="button">
 
-                                    <div class="d-flex justify-content-between" data-bs-toggle="dropdown">
-                                        <div>{{elem.message}}</div>
+                                    <!-- Testo del messaggio -->
+                                    <div>{{elem.message}}</div>
+
+                                    <div class="d-flex flex-column justify-content-between dropdwon">
+                                        
+                                        <!-- Icona da cui parte il dropdwon menu -->
+                                        <span data-bs-toggle="dropdown"><i class="fa-solid fa-chevron-up"></i></span>
+                                        <!-- Prendo solo l'ora nel formato hh:mm -->
                                         <div class="text-secondary align-self-end" style="font-size: 10px;">
                                             {{ elem.date.split(' ')[1].substring(0,5) }}</div>
 
-                                    </div>
-                                    <!-- Dropdown menu al click sul messaggio -->
-                                    <div class="dropdown-menu">
-                                        <a href="#" class="dropdown-item">Message info</a>
-                                        <hr class="dropdown-divider">
-                                        <a href="#" class="dropdown-item" @click="deleteMessage(elem)">Delete
-                                            message</a>
+                                        <!-- Dropdown menu al click sul messaggio -->
+                                        <div class="dropdown-menu">
+                                            <a href="#" class="dropdown-item">Message info</a>
+                                            <hr class="dropdown-divider">
+                                            <a href="#" class="dropdown-item" @click="deleteMessage(elem)">Delete
+                                                message</a>
+                                        </div>
+
                                     </div>
 
                                 </div>
