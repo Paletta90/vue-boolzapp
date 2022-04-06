@@ -19,7 +19,16 @@ var app = new Vue({
         stringSearchUser: '',
         // Nuovo messaggio
         newText: '',
-        Online: 'Online',
+        // Stringa che permettrà di far comparire Online per 3 secodi
+        Online: '',
+        // Array di risposte automatiche
+        arrayAnswers: [
+            'Aiutati che dio t\'aiuta',
+            'Il gioco è bello quando dura poco',
+            'Anche l\'occhio vuole la sua parte',
+            'A buon intenditor poche parole',
+            'Vivi e lascia vivere'
+        ],
         contacts: [{
                 name: 'Michele',
                 avatar: '_1',
@@ -176,9 +185,7 @@ var app = new Vue({
         ]
 
     },
-    created(){
-        console.log(this.newText.replace(/\s/g, '').length)
-    },
+    
     methods: {
 
         //Ritorno l'indice dello user selezionato
@@ -199,9 +206,11 @@ var app = new Vue({
 
         // Funzione risposta message 'Ok'
         printAnswer: function () {
+            let numrandom = Math.floor( Math.random() * this.arrayAnswers.length )
+            console.log(numrandom)
             let objSent = {
                 date: this.newDate(),
-                message: 'Ok',
+                message: this.arrayAnswers[numrandom],
                 status: 'received'
             }
             this.contacts[this.whoUser].messages.push(objSent)
