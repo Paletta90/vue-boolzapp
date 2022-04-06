@@ -9,9 +9,6 @@ var app = new Vue({
             avatar: '_io'
         },
 
-        emojRange: [
-            [128507, 128517]
-        ],
         // Booleano per schermata iniziale
         initial: false,
         // Booleano per cambiare colore microfono
@@ -179,9 +176,8 @@ var app = new Vue({
         ]
 
     },
-
     created(){
-        console.log(dayjs().get('hour'))
+        console.log(this.newText.replace(/\s/g, '').length)
     },
     methods: {
 
@@ -214,18 +210,23 @@ var app = new Vue({
         // Funzione per stampare nuovo messaggio inserito
         printNewText: function (text) {
 
-            let objReceived = {
-                date: this.newDate(),
-                message: text,
-                status: 'sent'
+            // Non stampo se la stringa è vuota o ci sono solo spazi bianchi
+            if (text != '' && text.replace(/\s/g, '').length != 0) {
+
+                let objReceived = {
+                    date: this.newDate(),
+                    message: text,
+                    status: 'sent'
+                }
+
+                this.contacts[this.whoUser].messages.push(objReceived)
+
+                // Faccio stampare la risposta 'Ok' con un secondo di ritardo
+                setTimeout(this.printAnswer, 1000)
+
+                this.newText = '';
             }
 
-            this.contacts[this.whoUser].messages.push(objReceived)
-
-            // Faccio stampare la risposta 'Ok' con un secondo di ritardo
-            setTimeout(this.printAnswer, 1000)
-
-            this.newText = '';
         },
 
         // Data di oggi dd/mm/yyyy
@@ -265,7 +266,6 @@ var app = new Vue({
 
             return String(this.dateToday() + " " + time)
         },
-
 
         // Funzione che ritorna l'orario dell'ultimo messaggio inviato/ricevuto hh:mm
         lastTime: function (elem) {
