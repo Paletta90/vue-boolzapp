@@ -32,6 +32,9 @@
     background-color: var(--color-textReceived);
     /* align-self: flex-end; */
 }
+.bg-userChat{
+    background-color: rgba(51, 170, 51, .4);
+}
 /* utility */
 .cursor-pointer{
     cursor: pointer;
@@ -45,7 +48,7 @@
 }
 /* Hover */
 .list-group-item:hover{
-    background-color: #e8ebee;
+    background-color: rgba(51, 170, 51, .4);
 }
 .fa-microphone:hover{
     color: red;

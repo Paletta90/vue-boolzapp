@@ -97,6 +97,7 @@
                             <!-- Lista utenti chat -->
                             <ul class="list-group list-group-flush overflow-auto">
                                 <li class="list-group-item d-flex flex-column flex-md-row justify-content-md-between"
+                                    :class="(index == whoUser) ? 'bg-userChat' : ''"
                                     v-for="(elem, index) in contacts" @click="userClicked(index)" role="button"
                                     v-if="searchUser(elem.name.toUpperCase())">
 

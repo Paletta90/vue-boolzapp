@@ -14,7 +14,7 @@ var app = new Vue({
         // Booleano per cambiare colore microfono
         mouseHovered: false,
         // Dato che gestisce quale user è stato cliccato
-        whoUser: 0,
+        whoUser: null,
         // Stringa per ricerca utenti
         stringSearchUser: '',
         // Nuovo messaggio
