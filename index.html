@@ -157,12 +157,19 @@
 
                                         <div class="fw-bolder">{{contacts[whoUser].name}}</div>
 
-                                        <!-- Controllo se la data di messaggio inserito/ricevuto è di oggi -->
-                                        <div v-if="compareTwoDate(dateToday())" class="text-secondary">Ultimo accesso
-                                            oggi alle {{lastTime(contacts[whoUser])}}</div>
-                                        <div v-else class="text-secondary">
-                                            Ultimo accesso {{lastDateTime(contacts[whoUser])}}
+                                        <!-- Se digito qualcosa esce la scritta 'Sta scrivendo...' -->
+                                        <div v-if="checkText(newText)" class="text-secondary">Sta scrivendo...</div>
+
+                                        <div v-else>
+                                            <!-- Controllo se la data di messaggio inserito/ricevuto è di oggi -->
+                                            <div v-if="compareTwoDate(dateToday())" class="text-secondary">
+                                                {{Online}}
+                                            </div>
+                                            <div v-else class="text-secondary">
+                                                Ultimo accesso {{lastDateTime(contacts[whoUser])}}
+                                            </div>
                                         </div>
+
 
                                     </div>
                                 </div>
@@ -223,14 +230,15 @@
                                 <!-- Input ricerca -->
                                 <input type="text" class="form-control p-3" placeholder="Scrivi messaggio"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-                                    v-model="newText" v-on:keyup.enter="printNewText(newText)">
+                                    v-model="newText" v-on:keyup.enter="printNewText(newText, contacts[whoUser])">
 
                                 <!-- Icone microphone -->
                                 <span class="text-secondary border-0 input-group-text px-4" id="inputGroup-sizing-sm"
                                     role="button">
 
                                     <!-- Se digito una stringa cambio in logo in aeroplano -->
-                                    <i v-if="checkText(newText)" @click="printNewText(newText)" class="fa-solid fa-paper-plane"></i>
+                                    <i v-if="checkText(newText)" @click="printNewText(newText, contacts[whoUser])"
+                                        class="fa-solid fa-paper-plane"></i>
                                     <i v-else class="fs-5 fa-solid fa-microphone"></i>
 
                                 </span>

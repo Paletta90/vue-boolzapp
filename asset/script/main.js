@@ -19,7 +19,7 @@ var app = new Vue({
         stringSearchUser: '',
         // Nuovo messaggio
         newText: '',
-
+        Online: 'Online',
         contacts: [{
                 name: 'Michele',
                 avatar: '_1',
@@ -207,8 +207,8 @@ var app = new Vue({
             this.contacts[this.whoUser].messages.push(objSent)
 
         },
-        // Funzione per stampare nuovo messaggio inserito
-        printNewText: function (text) {
+        // Funzione per stampare nuovo messaggio inserito e invoco la funzione printonline per tenere Online lo stato 3 secondi
+        printNewText: function (text, elem) {
 
             // Non stampo se la stringa è vuota o ci sono solo spazi bianchi
             if (this.checkText(text)) {
@@ -225,10 +225,17 @@ var app = new Vue({
                 setTimeout(this.printAnswer, 1000)
 
                 this.newText = '';
+
+                this.printOnline(elem)
+
             }
 
         },
-
+        // Funzione per stampare Online per 3 sec e poi data di oggi
+        printOnline: function(elem){
+            this.Online = 'Online'
+            setTimeout(() => {this.Online = String('Ultimo accesso alle ' + this.lastTime(elem))}, 3000)
+        },
         // Funzione per controlloare se la stringa non è vuota o ha solo spazi bianchi
         checkText: function(text){
             if(text != '' && text.replace(/\s/g, '').length != 0){
@@ -236,6 +243,7 @@ var app = new Vue({
             }
             return false
         },
+
         // Data di oggi dd/mm/yyyy
         dateToday: function () {
 
