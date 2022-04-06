@@ -99,7 +99,7 @@
                                 <li class="list-group-item d-flex flex-column flex-md-row justify-content-md-between"
                                     :class="(index == whoUser) ? 'bg-userChat' : ''"
                                     v-for="(elem, index) in contacts" @click="userClicked(index)" role="button"
-                                    v-if="searchUser(elem.name.toUpperCase())">
+                                    v-if="searchUser(elem.name.toUpperCase()) && elem.visible == true">
 
                                     <div class="d-flex flex-column flex-md-row">
                                         <!-- Icona user -->
@@ -176,10 +176,17 @@
                                 </div>
 
                                 <!-- Icone -->
-                                <div class="d-flex align-self-end align-self-sm-center text-secondary fs-5">
-                                    <i class="fa-solid fa-magnifying-glass me-3" role="button"></i>
+                                <div class="d-flex align-self-end align-self-sm-center text-secondary fs-5 dropdwon">
+                                    <i class="fa-solid fa-magnifying-glass me-3"  role="button"></i>
                                     <i class="fa-solid fa-paperclip me-3" role="button"></i>
-                                    <i class="fa-solid fa-ellipsis-vertical me-3" role="button"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical me-3" data-bs-toggle="dropdown" role="button"></i>
+
+                                     <!-- Dropdown menu al click sull'icona a tre pallini-->
+                                     <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item" @click="deleteChat(contacts[whoUser])">Elimina chat</a>
+                                        <hr class="dropdown-divider">
+                                        <a href="#" class="dropdown-item" @click="deleteAllMessages(contacts[whoUser])">Elimina messaggi</a>
+                                    </div>
                                 </div>
 
                             </div>

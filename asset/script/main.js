@@ -185,7 +185,7 @@ var app = new Vue({
         ]
 
     },
-    
+
     methods: {
 
         //Ritorno l'indice dello user selezionato
@@ -320,7 +320,16 @@ var app = new Vue({
         deleteMessage: function (elem) {
             elem.status = 'delete'
         },
-
+        // Funzione che cancella tutti i messaggi
+        deleteAllMessages: function(elem){
+            elem.messages.forEach( (element) => element.status = 'delete' )
+        },
+        // Funzione che cancella tutta la chat e lo user sulla barra di sinistra
+        deleteChat: function(elem){
+            elem.visible = false
+            this.initial = false
+            this.deleteAllMessages(elem)
+        },
         // Confronta una data con l'ultima data di invio/ricevuta. Se uguali ritorna true
         compareTwoDate: function (date) {
 
