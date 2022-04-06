@@ -1,6 +1,6 @@
 var app = new Vue({
     el: '#root',
-
+    
     data: {
 
         // Oggetto profilo
@@ -29,11 +29,27 @@ var app = new Vue({
             'A buon intenditor poche parole',
             'Vivi e lascia vivere'
         ],
+        // Array dei contatti
         contacts: [{
                 name: 'Michele',
                 avatar: '_1',
                 visible: true,
                 messages: [{
+                        date: '10/01/2020 15:30:55',
+                        message: 'Hai portato a spasso il cane?',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: 'Ricordati di stendere i panni',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 16:15:22',
+                        message: 'Tutto fatto!',
+                        status: 'received'
+                    },
+                    {
                         date: '10/01/2020 15:30:55',
                         message: 'Hai portato a spasso il cane?',
                         status: 'sent'
@@ -185,7 +201,6 @@ var app = new Vue({
         ]
 
     },
-
     methods: {
 
         //Ritorno l'indice dello user selezionato
@@ -206,15 +221,14 @@ var app = new Vue({
 
         // Funzione risposta message 'Ok'
         printAnswer: function () {
-            let numrandom = Math.floor( Math.random() * this.arrayAnswers.length )
-            console.log(numrandom)
+            let numrandom = Math.floor(Math.random() * this.arrayAnswers.length)
+
             let objSent = {
                 date: this.newDate(),
                 message: this.arrayAnswers[numrandom],
                 status: 'received'
             }
             this.contacts[this.whoUser].messages.push(objSent)
-
         },
         // Funzione per stampare nuovo messaggio inserito e invoco la funzione printonline per tenere Online lo stato 3 secondi
         printNewText: function (text, elem) {
@@ -236,18 +250,20 @@ var app = new Vue({
                 this.newText = '';
 
                 this.printOnline(elem)
-
+                
             }
 
         },
         // Funzione per stampare Online per 3 sec e poi data di oggi
-        printOnline: function(elem){
+        printOnline: function (elem) {
             this.Online = 'Online'
-            setTimeout(() => {this.Online = String('Ultimo accesso alle ' + this.lastTime(elem))}, 3000)
+            setTimeout(() => {
+                this.Online = String('Ultimo accesso alle ' + this.lastTime(elem))
+            }, 3000)
         },
         // Funzione per controlloare se la stringa non è vuota o ha solo spazi bianchi
-        checkText: function(text){
-            if(text != '' && text.replace(/\s/g, '').length != 0){
+        checkText: function (text) {
+            if (text != '' && text.replace(/\s/g, '').length != 0) {
                 return true
             }
             return false
@@ -321,11 +337,11 @@ var app = new Vue({
             elem.status = 'delete'
         },
         // Funzione che cancella tutti i messaggi
-        deleteAllMessages: function(elem){
-            elem.messages.forEach( (element) => element.status = 'delete' )
+        deleteAllMessages: function (elem) {
+            elem.messages.forEach((element) => element.status = 'delete')
         },
         // Funzione che cancella tutta la chat e lo user sulla barra di sinistra
-        deleteChat: function(elem){
+        deleteChat: function (elem) {
             elem.visible = false
             this.initial = false
             this.deleteAllMessages(elem)
@@ -344,6 +360,12 @@ var app = new Vue({
             }
             return false
         }
+
+        // Funztione per scollare fino al footer
+        // scrollToBottom() {
+        //     document.getElementById('blockFooter').scrollIntoView()
+        //     console.log('ora')
+        // }
 
     }
 
