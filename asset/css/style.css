@@ -4,6 +4,9 @@
     --color-footer: #f2eeed;
     --color-textReceived: #d8f8bf;
 }
+.container{
+    height: 90vh;
+}
 /* Background */
 .background-body{
     height: 100vh;
@@ -15,9 +18,11 @@
 }
 .bg-header{
     background-color: var(--color-header);
+    height: 10vh;
 }
 .bg-notice{
     background-color: var(--color-notice);
+    height: 10vh;
 }
 .bg-chat{
     background-image: url('../image/mine.jpg');
@@ -27,6 +32,7 @@
 }
 .bg-footer{
     background-color: var(--color-footer);
+    height: 15vh;
 }
 .bg-received{
     background-color: var(--color-textReceived);
@@ -40,11 +46,17 @@
     cursor: pointer;
 }
 .img-user{
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 }
 .w-35{
     width: 35%;
+}
+.h-5vh{
+    height: 5vh;
+}
+.h-65vh{
+    height: 65vh;
 }
 /* Hover */
 .list-group-item:hover{

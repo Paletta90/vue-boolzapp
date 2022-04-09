@@ -24,15 +24,15 @@
     <div id="root">
 
         <!-- Sfondo della pagina -->
-        <div class="background-body p-5">
+        <div class="background-body d-flex align-items-center">
 
             <!-- Contenitore applicazione -->
-            <div class="container h-100">
+            <div class="container">
 
                 <div class="row h-100 g-0">
 
                     <!-- Parte sinistra -->
-                    <div class="col-4 overflow-auto h-100">
+                    <div class="col-4">
 
                         <!-- Dati profilo -->
                         <div class="bg-header d-flex justify-content-between align-items-center p-2">
@@ -63,9 +63,9 @@
                             <div class="me-3">
 
                                 <div class="bg-white rounded-circle d-flex justify-content-center align-items-center"
-                                    role="button" style="width: 70px; height: 70px;">
+                                    role="button" style="width: 50px; height: 50px;">
                                     <i class="fa-regular fa-bell-slash"
-                                        style="font-size: 30px; color: var(--color-notice);"></i>
+                                        style="font-size: 25px; color: var(--color-notice);"></i>
                                 </div>
 
                             </div>
@@ -79,23 +79,23 @@
                         </div>
 
                         <!-- Lista utenti  -->
-                        <div class="bg-white h-100">
+                        <div class="bg-white">
 
                             <!-- Barra ricerca utenti -->
-                            <div class="input-group input-group-sm p-2">
+                            <div class="input-group input-group-sm h-5vh p-2">
                                 <!-- Icona search -->
                                 <span class="bg-white border-end-0 input-group-text cursor-pointer px-4"
-                                    id="inputGroup-sizing-sm">
+                                    id="inputGroup-sizing-sm" style="height: 100%;">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </span>
                                 <!-- Input ricerca -->
                                 <input type="text" class="border-start-0 form-control " v-model="stringSearchUser"
                                     placeholder="Cerca o inizia una nuova chat" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-sm">
+                                    aria-describedby="inputGroup-sizing-sm" style="height: 100%;">
                             </div>
 
                             <!-- Lista utenti chat -->
-                            <ul class="list-group list-group-flush overflow-auto">
+                            <ul class="list-group list-group-flush h-65vh overflow-auto">
                                 <li class="list-group-item d-flex flex-column flex-md-row justify-content-md-between"
                                     :class="(index == whoUser) ? 'bg-userChat' : ''"
                                     v-for="(elem, index) in contacts" @click="userClicked(index)" role="button"
@@ -134,7 +134,7 @@
                     </div>
 
                     <!-- Parte destra -->
-                    <div class="col-8 d-flex flex-column justify-content-between bg-chat overflow-auto h-100">
+                    <div class="col-8 d-flex flex-column justify-content-between bg-chat">
 
                         <!-- Testo che compare quando viene caricata la pagina -->
                         <div v-if="initial == false" class="text-center">
@@ -193,7 +193,7 @@
                             </div>
 
                             <!-- Sezione messaggi inviati e ricevuti -->
-                            <div class="d-flex flex-column">
+                            <div class="d-flex flex-column h-65vh overflow-auto">
                                 <div class="d-flex justify-content-between rounded-3 w-35 p-2 m-3"
                                     v-for="(elem, index) in contacts[whoUser].messages" v-if="elem.status != 'delete'"
                                     :class="(elem.status == 'received') ? 'bg-received align-self-end' : 'bg-white'"
@@ -226,7 +226,7 @@
                         </div>
 
                         <!-- Footer invio messaggi -->
-                        <div id="blockFooter" v-if="initial == true" class="bg-footer">
+                        <div id="blockFooter" v-if="initial == true" class="bg-footer d-flex align-items-center">
 
                             <div class="input-group input-group-sm p-2">
 
